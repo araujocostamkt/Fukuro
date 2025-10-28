@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fukurō — Consultoria em Eficiência Digital</title>
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --color-primary:#0A1C2F;   /* Azul Profundo Noturno */
+      --color-secondary:#1F6FEB; /* Azul Elétrico Luminoso */
+      --color-contrast:#FFFFFF;  /* Branco Puro */
+      --color-support:#9CA3AF;   /* Cinza Titânio */
+      --color-accent:#C6A14A;    /* Dourado Inteligente */
+      --shadow-xl: 0 10px 20px rgba(0,0,0,.25), 0 6px 6px rgba(0,0,0,.18);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--color-primary);
+      color: var(--color-contrast);
+    }
+
+    body { font-family: "Exo 2", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+
+    /* Utilidades */
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+    .font-display { font-family: "League Spartan", Impact, system-ui, sans-serif; }
+    .font-serif   { font-family: "Libre Baskerville", Georgia, serif; }
+    .btn-primary {
+      background: var(--color-secondary);
+      color: var(--color-contrast);
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-xl);
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-accent {
+      background: var(--color-accent);
+      color: #0a0a0a;
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .chip {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--color-contrast);
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(6px);
+      border-radius: 22px;
+      box-shadow: var(--shadow-xl);
+    }
+    .bg-slab { background: #0C2138; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
+
+    /* Navbar */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,28,47,0.7);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .brand-badge {
+      height: 36px; width: 36px; border-radius: 14px;
+      background: radial-gradient(120% 120% at 20% 10%, var(--color-secondary) 0%, var(--color-accent) 70%);
+      display: grid; place-items: center; box-shadow: 0 6px 16px rgba(0,0,0,.35);
+    }
+    .brand-badge span { font-family: "League Spartan"; font-weight: 800; color: #0a0a0a; }
+    .brand-title { line-height: 1; }
+    .brand-title .name { font-family: "League Spartan"; font-size: 20px; letter-spacing: .3px; }
+    .brand-title .sub  { font-size: 12px; color: var(--color-support); margin-top: -2px; }
+
+    nav.menu { display: none; gap: 22px; }
+    nav.menu a { color: inherit; text-decoration: none; font-size: 14px; }
+    nav.menu a:hover { color: var(--color-secondary); }
+
+    @media (min-width: 768px){ nav.menu { display: flex; } }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: .4;
+    }
+    .hero-aura-1, .hero-aura-2 {
+      position: absolute; border-radius: 999px; filter: blur(40px); opacity: .30;
+    }
+    .hero-aura-1 { top: -96px; left: -96px; width: 280px; height: 280px; background: radial-gradient(circle at 30% 30%, #1F6FEB55, transparent 60%); }
+    .hero-aura-2 { bottom: -120px; right: -160px; width: 360px; height: 360px; background: radial-gradient(circle at 60% 60%, #C6A14A66, transparent 60%); }
+
+    .hero-inner { position: relative; padding: 80px 0; display: grid; gap: 40px; }
+    @media (min-width: 960px){ .hero-inner { grid-template-columns: 1.1fr 0.9fr; align-items: center; } }
+
+    .hero h1 { font-family: "League Spartan"; font-size: 40px; line-height: 1.1; margin: 0; }
+    @media (min-width: 768px){ .hero h1 { font-size: 64px; } }
+    .hero p { margin: 18px 0 0; color: var(--color-support); font-size: 18px; line-height: 1.6; }
+    .hero .cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero .chips { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* Seções */
+    section { padding: 80px 0; }
+    h2.section-title { font-family: "League Spartan"; font-size: 36px; margin: 0 0 18px 0; }
+    p.muted { color: var(--color-support); }
+
+    /* Cards simples */
+    .cards { display: grid; gap: 16px; }
+    @media (min-width: 900px){ .cards.cols-4 { grid-template-columns: repeat(4, 1fr); } .cards.cols-2 { grid-template-columns: repeat(2, 1fr); } }
+
+    .card { padding: 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+
+    /* Equipe */
+    .team { display: grid; gap: 16px; }
+    @media (min-width: 900px){ .team { grid-template-columns: repeat(2, 1fr); } }
+    .avatar {
+      height: 56px; width: 56px; border-radius: 16px;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+      color: #0a0a0a; display: grid; place-items: center;
+      font-family: "League Spartan"; font-weight: 800; font-size: 20px;
+    }
+
+    /* Formulário */
+    form.inline-grid {
+      width: 100%;
+      display: grid; gap: 10px;
+    }
+    @media (min-width: 640px){ form.inline-grid { grid-template-columns: 1fr 1fr; } }
+    input.text {
+      height: 48px; border-radius: 12px; border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06); color: var(--color-contrast);
+      padding: 0 14px; outline: none;
+    }
+    input.text:focus { border-color: var(--color-secondary); box-shadow: 0 0 0 2px rgba(31,111,235,.35); }
+
+    /* Footer */
+    footer { padding: 36px 0; color: var(--color-support); font-size: 14px; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { color: inherit; text-decoration: none; }
+    .footer-links a:hover { color: var(--color-secondary); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Fukurō — Início">
+        <div class="brand-badge"><span>フ</span></div>
+        <div class="brand-title">
+          <div class="name">Fukurō</div>
+          <div class="sub">Consultoria em Eficiência Digital</div>
+        </div>
+      </a>
+
+      <nav class="menu" aria-label="Principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Processo</a>
+        <a href="#modelos">Modelos</a>
+        <a href="#time">Equipe</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a href="#contato" class="btn-accent" aria-label="Fale conosco">Começar</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-grid"></div>
+    <div class="hero-aura-1"></div>
+    <div class="hero-aura-2"></div>
+
+    <div class="container hero-inner">
+      <div>
+        <h1>Eficiência digital para <span style="color:var(--color-accent)">fazer mais</span> com menos.</h1>
+        <p>Identificamos desperdícios, automatizamos processos e transformamos dados em decisão. Um atalho prático para liberar o potencial tecnológico que sua empresa já tem.</p>
+        <div class="chips">
+          <span class="chip">Automação</span>
+          <span class="chip">Dados &amp; KPIs</span>
+          <span class="chip">Mapeamento de Processos</span>
+          <span class="chip">Workshops</span>
+        </div>
+        <div class="cta">
+          <a href="#contato" class="btn-primary">Quero um diagnóstico</a>
+          <a href="#servicos" class="btn-accent" style="text-decoration:none; display:inline-grid; place-items:center;">Conhecer serviços</a>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:22px;">
+        <div style="color:var(--color-support); font-size:14px;">Como ajudamos</div>
+        <ul style="list-style:none; padding:0; margin:14px 0 0 0; display:grid; gap:12px;">
+          <li><strong class="font-display">Diagnóstico de maturidade digital</strong><br><span class="muted">Mapa de oportunidades, gaps e priorização.</span></li>
+          <li><strong class="font-display">Automação e eficiência operacional</strong><br><span class="muted">Do mapeamento à viabilidade e plano de ação.</span></li>
+          <li><strong class="font-display">KPIs e inteligência de dados</strong><br><span class="muted">Métricas que importam e protótipos de dashboards.</span></li>
+          <li><strong class="font-display">Workshops e cursos</strong><br><span class="muted">Formação prática e mentoria executiva.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="container">
+      <div style="display:grid; gap:26px; align-items:start;">
+        <div>
+          <h2 class="section-title">Quem somos</h2>
+          <p class="muted" style="line-height:1.8;">
+            Observamos um descompasso frequente entre o que as empresas possuem de tecnologia e o que realmente utilizam no dia a dia.
+            Processos manuais persistem, dados ficam subaproveitados e a conta não fecha. A Fukurō existe para destravar esse potencial:
+            tornamos a tecnologia útil, mensurável e rentável.
+          </p>
+          <blockquote class="font-serif" style="margin:16px 0 0; padding-left:14px; border-left:4px solid var(--color-accent); color:var(--color-support); font-style:italic;">
+            “Muitas empresas gastam muito e, no fim, não sabem transformar esse investimento em lucro.”
+          </blockquote>
+        </div>
+
+        <div class="glass" style="padding:22px;">
+          <h3 class="font-display" style="margin:0 0 10px;">Missão, visão e valores</h3>
+          <ul class="muted" style="margin:0; padding-left:18px; line-height:1.8;">
+            <li><span style="color:var(--color-contrast)">Missão:</span> ajudar organizações a conquistarem independência e eficiência com uso estratégico de dados e automação.</li>
+            <li><span style="color:var(--color-contrast)">Visão:</span> referência nacional em transformação digital acessível e orientada a resultados.</li>
+            <li><span style="color:var(--color-contrast)">Valores:</span> inovação, ética, transparência, eficiência e foco no resultado.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="bg-slab">
+    <div class="container">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:18px; flex-wrap:wrap;">
+        <h2 class="section-title">O que fazemos</h2>
+        <div class="muted" style="font-size:14px;">Consultoria em digitalização e eficiência</div>
+      </div>
+
+      <div class="cards cols-4" style="margin-top:20px;">
+        <div class="card">
+          <h3 class="font-display" style="margin:6px 0 8px;">Diagnóstico de Maturidade Digital</h3>
+          <p class="muted">Avaliação de processos, ferramentas e uso de dados. Entrega: mapa de oportunidades e relatório executivo.</p>
+        </div>
+        <div class="card">
+          <h3 class="font-display" style="margin:6px 0 8px;">Automação &amp; Eficiência</h3>
+          <p class="muted">Mapeamento de fluxos, análise de ROI e priorização. Roadmap de automação com responsáveis e prazos.</p>
+        </div>
+        <div class="card">
+          <h3 class="font-display" style="margin:6px 0 8px;">KPIs &amp; Inteligência de Dados</h3>
+          <p class="muted">Definição de métricas estratégicas, táticas e operacionais. Protótipos de dashboards.</p>
+        </div>
+        <div class="card">
+          <h3 class="font-display" style="margin:6px 0 8px;">Workshops e Treinamentos</h3>
+          <p class="muted">Capacitação prática, cursos sob medida e mentoria executiva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section id="processo">
+    <div class="container">
+      <h2 class="section-title">Como trabalhamos</h2>
+      <div class="cards cols-4" style="margin-top:20px;">
+        <div class="card">
+          <div class="chip" style="background:var(--color-accent); color:#0a0a0a; border:0;">1</div>
+          <h3 class="font-display" style="margin:10px 0 6px;">Diagnóstico</h3>
+          <p class="muted">Imersão rápida para mapear oportunidades priorizadas.</p>
+        </div>
+        <div class="card">
+          <div class="chip" style="background:var(--color-accent); color:#0a0a0a; border:0;">2</div>
+          <h3 class="font-display" style="margin:10px 0 6px;">Reunião prescritiva</h3>
+          <p class="muted">Discussão dos achados e desenho dos próximos passos.</p>
+        </div>
+        <div class="card">
+          <div class="chip" style="background:var(--color-accent); color:#0a0a0a; border:0;">3</div>
+          <h3 class="font-display" style="margin:10px 0 6px;">Execução &amp; Revisão</h3>
+          <p class="muted">Implementação do plano, revisão final e entrega.</p>
+        </div>
+        <div class="card">
+          <div class="chip" style="background:var(--color-accent); color:#0a0a0a; border:0;">4</div>
+          <h3 class="font-display" style="margin:10px 0 6px;">Acompanhamento</h3>
+          <p class="muted">Opção de suporte contínuo para consolidar ganhos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELOS COMERCIAIS -->
+  <section id="modelos" class="bg-slab">
+    <div class="container">
+      <h2 class="section-title">Modelos comerciais</h2>
+      <div class="cards cols-4" style="margin-top:20px;">
+        <div class="card">
+          <div class="muted" style="font-size:14px;">Ideal para entregas pontuais</div>
+          <h3 class="font-display" style="margin:8px 0 6px;">Projeto de Escopo Fechado</h3>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Briefing e cronograma claros</li>
+            <li>Preço e prazo definidos</li>
+            <li>Aceite por marcos</li>
+          </ul>
+          <div style="margin-top:14px;"><a href="#contato" class="btn-primary" style="text-decoration:none;">Solicitar proposta</a></div>
+        </div>
+        <div class="card">
+          <div class="muted" style="font-size:14px;">Parceria mensal (retainer)</div>
+          <h3 class="font-display" style="margin:8px 0 6px;">Consultoria Recorrente</h3>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Backlog evolutivo</li>
+            <li>SLAs acordados</li>
+            <li>Relatórios mensais</li>
+          </ul>
+          <div style="margin-top:14px;"><a href="#contato" class="btn-primary" style="text-decoration:none;">Solicitar proposta</a></div>
+        </div>
+        <div class="card">
+          <div class="muted" style="font-size:14px;">Formação aplicada</div>
+          <h3 class="font-display" style="margin:8px 0 6px;">Workshops &amp; Cursos</h3>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Conteúdo sob medida</li>
+            <li>Hands-on com casos reais</li>
+            <li>Certificado</li>
+          </ul>
+          <div style="margin-top:14px;"><a href="#contato" class="btn-primary" style="text-decoration:none;">Solicitar proposta</a></div>
+        </div>
+        <div class="card">
+          <div class="muted" style="font-size:14px;">Desenvolvimento de líderes</div>
+          <h3 class="font-display" style="margin:8px 0 6px;">Mentoria Executiva</h3>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>1:1 ou small group</li>
+            <li>Planos de ação práticos</li>
+            <li>Foco em dados e automação</li>
+          </ul>
+          <div style="margin-top:14px;"><a href="#contato" class="btn-primary" style="text-decoration:none;">Solicitar proposta</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section id="time">
+    <div class="container">
+      <h2 class="section-title">A equipe</h2>
+      <div class="team" style="margin-top:20px;">
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start;">
+          <div class="avatar">A</div>
+          <div>
+            <div class="font-display" style="font-size:20px;">Andrey Costa</div>
+            <div class="muted" style="font-size:14px;">Dados, automações locais e prototipagem</div>
+            <p class="muted" style="margin-top:8px;">Economista e mestrando em Finanças, com foco em gestão de produtos e analytics. Orientado a resultados: fazer cada vez mais com cada vez menos.</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start;">
+          <div class="avatar">O</div>
+          <div>
+            <div class="font-display" style="font-size:20px;">Otávio</div>
+            <div class="muted" style="font-size:14px;">Mapeamento de processos e melhoria operacional</div>
+            <p class="muted" style="margin-top:8px;">Engenheiro mecânico com experiência na indústria e no mercado financeiro. Especialista em encontrar gargalos e oportunidades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contato" class="bg-slab">
+    <div class="container">
+      <div class="glass" style="padding:24px; display:flex; gap:18px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+        <div>
+          <h3 class="font-display" style="font-size:28px; margin:0;">Pronto para liberar eficiência?</h3>
+          <p class="muted" style="margin:6px 0 0;">Agende um diagnóstico gratuito de 30 minutos e receba um mapa inicial de oportunidades.</p>
+        </div>
+        <form class="inline-grid" action="#" method="post">
+          <input class="text" name="nome"    placeholder="Seu nome" required>
+          <input class="text" name="email"   type="email" placeholder="Seu e-mail" required>
+          <input class="text" name="empresa" placeholder="Empresa (opcional)" style="grid-column:1/-1;">
+          <button class="btn-accent" type="submit" style="height:48px; border-radius:12px;">Agendar diagnóstico</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+      <div>© <span id="y"></span> Fukurō Consultoria Digital. Todos os direitos reservados.</div>
+      <div class="footer-links" aria-label="Links de rodapé">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // atualiza ano do footer
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
